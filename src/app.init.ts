@@ -24,6 +24,7 @@ const initPostgresConnection = async (): Promise<Connection> => {
     password: process.env.POSTGRES_PASSWORD || "admin123456",
     database: process.env.POSTGRES_DATABASE || "Bus_Manager",
     entities: [__dirname + "/entities/*.{js,ts}"],
+    synchronize:true,
   });
   return connection;
 };
