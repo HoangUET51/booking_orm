@@ -1,5 +1,6 @@
 import  BaseEntity from "../base/base.entity";
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import Ticket from "./ticket";
 
 @Index("user_pkey",["id"], {unique:true})
 @Entity("user",{schema:"public"})
@@ -21,6 +22,9 @@ export class User extends BaseEntity {
 
     @Column("character varying",{ name: "type", nullable: true })
     type:string | null;
+
+    @OneToMany(()=>Ticket,(ticket) => ticket.user)
+    tickets:Ticket[]
 }
 
 export default User;
