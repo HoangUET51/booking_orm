@@ -10,7 +10,7 @@ const initEnvironments = (): void => {
     path: path.join(
       process.cwd(),
       "environments",
-      `.env.${process.env.NODE_ENV}`
+      `.env.${process.env.NODE_ENV}`,
     ),
   });
 };
@@ -22,9 +22,9 @@ const initPostgresConnection = async (): Promise<Connection> => {
     port: Number(process.env.POSTGRES_TCP_PORT) || 5432,
     username: process.env.POSTGRES_USER || "postgres",
     password: process.env.POSTGRES_PASSWORD || "admin123456",
-    database: process.env.POSTGRES_DATABASE || "Bus_Manager",
+    database: process.env.POSTGRES_DATABASE || "booking_manager",
     entities: [__dirname + "/entities/*.{js,ts}"],
-    synchronize:true,
+    synchronize: true,
   });
   return connection;
 };
