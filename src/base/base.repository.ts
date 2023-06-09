@@ -3,7 +3,7 @@ import { Repository, FindManyOptions } from "typeorm";
 import BaseEntity from "./base.entity";
 import { TypeOrmPaginator } from "./base.type";
 
-class BaseRepository<E extends BaseEntity> extends Repository<E> {
+abstract class BaseRepository<E extends BaseEntity> extends Repository<E> {
   async findById(id: string | number): Promise<E | undefined> {
     const record = await this.findOne(id);
     return record;
@@ -52,7 +52,7 @@ class BaseRepository<E extends BaseEntity> extends Repository<E> {
   async paginate(
     page = 1,
     limit = 20,
-    options?: FindManyOptions<E>
+    options?: FindManyOptions<E>,
   ): Promise<TypeOrmPaginator<E>> {
     const skip = (page - 1) * limit;
     const [records, count] = await this.findAndCount({
